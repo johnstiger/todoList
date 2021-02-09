@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="icon" href="">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Todo List</title>
+    <style>
+        *{
+            margin:0;
+            padding:0;
+            box-sizing: border-box;
+            font-family: 'Poppins',sans-serif;
+        }
+        body{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: black;
+        }
+        .list{
+            border-radius: 10px;
+            position: relative;
+             background: #fff;
+             width: 350px;
+        }
+       .list h2{
+            background: #03a9f4;
+            color: #fff;
+            padding: 20px;
+            font-weight: 600;
+            border-radius: 10px;
+        }
+        .list ul{
+            position:relative;
+            padding:20px;
+        }
+        .list ul li{
+            position: relative;
+            list-style: none;
+            padding: 15px 0;
+            border-bottom: 1px solid rgba(0,0,0,0.1);
+        }
+        .list ul li:last-child{
+            border-bottom: none;
+        }
+        .list ul li label{
+            position: relative;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+        }
+        #item{
+            width: 80%;
+            height: 50%;
+        }
+    </style>
+</head>
+<body>
+    <div class="list">
+    <h2>What do you want to do?</h2>
+    <hr>
+    <br>
+    <center>
+    <form action="/TodoRouter/NewTodo" method = "POST">
+        <input id="item" type="text" value="<%= name %>"name="item" placeholder="Enter todo item"><span><button type="submit">Submit</button></span>
+    </form>
+</center>
+    <br>
+    <ul>
+    <% todoList.forEach(function(item){ %>
+            <li>
+            <form action="/TodoRouter/deleteTodo/<%= item._id %>" method="GET" >    
+                <label for="">   
+                <input type="checkbox" id="checkbox" value="<%= item.name %>" onChange = "this.form.submit()" name="checkbox">
+             <p><a href="/TodoRouter/updateTodo/<%= item._id %>"><%= item.name %></a></p>
+             <span></span>
+            </label>
+            </form>
+           <% }); %>
+        </li>
+        </ul>
+</div> 
+</body>
+</html>
